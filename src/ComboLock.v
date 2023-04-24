@@ -1,4 +1,5 @@
 // Code your design here
+
 module BenAtUvu_combo(
   //input [3:0] Intput, 
   //input reset, masterReset, 
@@ -6,12 +7,124 @@ module BenAtUvu_combo(
   input [7:0] io_in,
   output [7:0] io_out
 );
-  wire [3:0] Intput;
+
+
+  reg [3:0] Intput;
+  wire [3:0] keypadIn;
+  reg [3:0] scan;
+  wire clk = io_in[6];
   wire reset = io_in[4];
   wire masterReset = io_in[5];
   reg Unlock;
-  assign Intput = io_in[3:0];
-  assign io_out[0] = Unlock;
+  reg zero;
+  reg [3:0] zeroSum = 0;
+  assign io_out[3:0] = scan;
+  assign io_out[4] = Unlock;
+  assign keypadIn = io_in[3:0];
+
+  always@(posedge clk) begin
+    zero = 1;
+    if(scan == 4'b0001)
+      scan = 4'b0010;
+    else if(scan == 4'b0010)
+      scan = 4'b0100;
+    else if(scan == 4'b0100)
+      scan = 4'b1000;
+    else
+      scan = 4'b0001;
+    
+    
+    if(scan == 4'b0001)begin
+      
+    if(keypadIn ==4'b0001)
+        Intput = 1;
+    else if(keypadIn ==4'b0010)
+        Intput = 2;
+    else if(keypadIn ==4'b0100)
+        Intput = 3;
+    else if(keypadIn ==4'b1000)
+        Intput = 4;
+    else
+      zero = 0;
+    end
+    
+    if(scan == 4'b0010) begin
+    if(keypadIn ==4'b0001)begin
+      Intput = 5;
+      zero = 1;
+    end
+    else if(keypadIn ==4'b0010)begin
+      Intput = 6;
+      zero = 1;
+    end
+    else if(keypadIn ==4'b0100)begin
+      Intput = 7;
+      zero =1;
+    end
+    else if(keypadIn ==4'b1000) begin
+      Intput = 8;
+      zero =1;
+    end
+    else
+        zero = 0;
+    end
+       
+    if(scan == 4'b0100)begin
+    if(keypadIn ==4'b0001)begin
+      Intput = 9;
+      zero =1;
+    end
+    else if(keypadIn ==4'b0010)begin
+      Intput = 10;
+      zero= 1;
+    end
+    else if(keypadIn ==4'b0100)begin
+      Intput = 11;
+      zero = 1;
+    end
+    else if(keypadIn ==4'b1000)begin
+      Intput = 12;
+      zero = 1;
+    end
+    else
+        zero = 0;
+    end
+       
+    if(scan == 4'b1000)begin
+    if(keypadIn ==4'b0001)begin
+      Intput = 13;
+      zero = 1;
+    end
+    else if(keypadIn ==4'b0010)begin
+      Intput = 14;
+      zero =1;
+    end
+    else if(keypadIn ==4'b0100)begin
+      Intput = 15;
+      zero =1;
+    end
+    else if(keypadIn ==4'b1000)begin
+      Intput = 1;
+      zero = 1;
+    end
+    else
+        zero = 0;
+    
+    end
+    
+    
+    if(zero == 0)
+      zeroSum = zeroSum + 1;
+    else
+      zeroSum = 0;
+    
+    if(zeroSum == 4)begin
+      Intput = 0;
+      zeroSum = 0;
+    end
+    
+  end
+    
   // in this module 4 bits are used to represent 0-9 BUT 0 if not represented with 0000
 
   //locks is used for the combo lock1 is the first button that neededs to be pressed then lock2 is the second button
@@ -108,4 +221,5 @@ module BenAtUvu_combo(
     else
       Unlock = 0;
   end
+  
 endmodule
