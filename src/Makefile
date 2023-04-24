@@ -1,7 +1,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
-VERILOG_SOURCES += $(PWD)/tb.v $(PWD)/my_custom_verilog.v
+VERILOG_SOURCES += $(PWD)/tb.v $(PWD)/ComboLock.v
 
 TOPLEVEL = tb
 
