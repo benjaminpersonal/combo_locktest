@@ -13,7 +13,7 @@ module tb (
     wire [7:0] inputs;
     wire [7:0] outputs;
 
-    toplevel_module toplevel_module (
+    BenAtUvu_combo BenAtUvu_combo (
         .io_in (inputs),
         .io_out (outputs)
     );
