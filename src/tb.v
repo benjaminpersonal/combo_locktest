@@ -2,6 +2,8 @@
 `timescale 1ns/1ps
 
 module tb (
+      input [7:0] io_in,
+  output [7:0] io_out
     );
 
     initial begin
