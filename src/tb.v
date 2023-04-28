@@ -7,7 +7,7 @@ module tb (
       input masterRST,
       input [3:0] code,
       output [3:0] scan,
-      output unlock
+      output [4:0] OUT
     );
 
     initial begin
