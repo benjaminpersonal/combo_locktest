@@ -2,8 +2,12 @@
 `timescale 1ns/1ps
 
 module tb (
-      input [7:0] io_in,
-  output [7:0] io_out
+      input CLK,
+      input RST,
+      input masterRST,
+      input [3:0] code,
+      output [3:0] scan,
+      output unlock
     );
 
     initial begin
@@ -12,8 +16,9 @@ module tb (
         #1;
     end
 
-    wire [7:0] inputs;
-    wire [7:0] outputs;
+      wire [7:0] inputs = {1'b0,CLK,masterRST,RST,code};
+      assign OUT = outputs[4:0];
+
 
     BenAtUvu_combo BenAtUvu_combo (
         .io_in (inputs),
