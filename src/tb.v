@@ -6,7 +6,6 @@ module tb (
       input RST,
       input masterRST,
       input [3:0] code,
-      output [3:0] scan,
       output [4:0] OUT
     );
 
