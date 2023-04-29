@@ -20,8 +20,9 @@ module tb (
 
 
     BenAtUvu_combo BenAtUvu_combo (
-        .io_in (inputs),
-        .io_out (outputs)
+          .io_out (outputs),
+          .io_in (inputs)
+
     );
 
 endmodule
