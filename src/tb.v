@@ -16,6 +16,7 @@ module tb (
     end
 
       wire [7:0] inputs = {1'b0,CLK,masterRST,RST,code};
+      wire [7:0] outputs;
       assign OUT = outputs[4:0];
 
 
