@@ -2,10 +2,10 @@
 `timescale 1ns/1ps
 
 module tb (
-      input CLK,
+      input [3:0] code,
       input RST,
       input masterRST,
-      input [3:0] code,
+      input CLK,
       output [4:0] OUT
     );
 
@@ -20,8 +20,9 @@ module tb (
 
 
     BenAtUvu_combo BenAtUvu_combo (
-          .io_out (outputs),
-          .io_in (inputs)
+          .io_in (inputs),
+          .io_out (outputs)
+          
 
     );
 
